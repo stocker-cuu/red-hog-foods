@@ -35,7 +35,7 @@ export const SALSAS = [
   {
     id: 'fresca',
     name: 'Fresca',
-    description: 'Rojiza y jugosa, con todo el ingrediente en crudo',
+    description: 'Rojiza y jugosa, con ingredientes crudos',
     ingredients: 'Tomate, jalapeño, serrano en crudo',
     heat: '2 chiles',
     heatLevel: 2,
@@ -46,7 +46,7 @@ export const SALSAS = [
   {
     id: 'guera',
     name: 'Güera',
-    description: 'Amarilla cremosa con especias',
+    description: 'Cremosita con especias',
     ingredients: 'Chiles güeros, chile habanero y especias',
     heat: '2 chiles',
     heatLevel: 2,
@@ -57,7 +57,7 @@ export const SALSAS = [
   {
     id: 'roja',
     name: 'Roja',
-    description: 'Clásica, balanceada y lista para todo',
+    description: 'Clásica y balanceada',
     ingredients: 'Tomate, chile de árbol tatemado y chiltepin',
     heat: '3 chiles',
     heatLevel: 3,
@@ -68,7 +68,7 @@ export const SALSAS = [
   {
     id: 'tomatilla',
     name: 'Tomatilla',
-    description: 'Vibrante con tomatillo y chiles tatemados',
+    description: 'Tomatillo y chiles tatemados',
     ingredients: 'Tomatillo, jalapeño tatemado, serrano tatemado y cilantro',
     heat: '2 chiles',
     heatLevel: 2,
@@ -79,7 +79,7 @@ export const SALSAS = [
   {
     id: 'negra',
     name: 'Negra',
-    description: 'Oscura y con profundidad de sabor',
+    description: 'Chiles tatemados, salsas negras',
     ingredients: 'Habaneros tatemados, salsas negras y especias',
     heat: '4 chiles',
     heatLevel: 4,
