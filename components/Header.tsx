@@ -24,16 +24,15 @@ export default function Header() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="#" className="flex items-center gap-2">
-              <div className="w-12 h-12 relative">
+              <div className="w-14 h-14 relative">
                 <Image
                   src="/logo.jpg"
                   alt="Red Hog"
-                  width={48}
-                  height={48}
+                  width={56}
+                  height={56}
                   className="rounded-full object-cover"
                 />
               </div>
-              <span className="hidden sm:inline font-bold text-lg text-redhog-red">Red Hog</span>
             </Link>
           </div>
 

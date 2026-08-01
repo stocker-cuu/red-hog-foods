@@ -1,8 +1,10 @@
-export const WHATSAPP_NUMBER = '525512345678';
+// Configuración centralizada
+export const WHATSAPP_NUMBER = '526142315153'; // ✅ Chihuahua
 export const BRAND_NAME = 'Red Hog Foods';
 export const BRAND_SHORT = 'Red Hog';
 export const LOCATION = 'Chihuahua, Chihuahua, México';
 
+// Presentaciones y precios
 export const PRESENTATIONS = {
   small: {
     volume: '220 ml',
@@ -14,14 +16,15 @@ export const PRESENTATIONS = {
   },
 } as const;
 
+// Productos
 export const SALSAS = [
   {
     id: 'fresca',
     name: 'Fresca',
-    description: 'Verde, jugosa y con el toque perfecto de cilantro',
-    ingredients: 'Tomatillos, jalapeños, cilantro, cebolla, ajo',
-    heat: 'Suave',
-    heatLevel: 1,
+    description: 'Verde, jugosa y con ingredientes frescos',
+    ingredients: 'Tomate, jalapeño, serrano en crudo',
+    heat: '2 chiles',
+    heatLevel: 2,
     recommendedFor: 'Pescados, mariscos, botanas frescas',
     image: '/images/salsa-fresca.jpg',
     color: '#8BC34A',
@@ -29,9 +32,9 @@ export const SALSAS = [
   {
     id: 'guera',
     name: 'Güera',
-    description: 'Amarilla cremosa con un toque de serrano',
-    ingredients: 'Chiles güeros, tomate, ajo, crema',
-    heat: 'Medio',
+    description: 'Amarilla cremosa con especias',
+    ingredients: 'Chiles güeros, chile habanero y especias',
+    heat: '2 chiles',
     heatLevel: 2,
     recommendedFor: 'Tacos al pastor, quesadillas, carne asada',
     image: '/images/salsa-guera.jpg',
@@ -41,9 +44,9 @@ export const SALSAS = [
     id: 'roja',
     name: 'Roja',
     description: 'Clásica, balanceada y lista para todo',
-    ingredients: 'Tomates rojos, chiles guajillo, ajo, especias',
-    heat: 'Medio',
-    heatLevel: 2,
+    ingredients: 'Tomate, chile de árbol tatemado y chiltepin',
+    heat: '3 chiles',
+    heatLevel: 3,
     recommendedFor: 'Carne asada, enchiladas, chilaquiles',
     image: '/images/salsa-roja.jpg',
     color: '#DC2626',
@@ -51,10 +54,10 @@ export const SALSAS = [
   {
     id: 'tomatilla',
     name: 'Tomatilla',
-    description: 'Vibrante con tomatillo fresco y habanero',
-    ingredients: 'Tomatillos, habaneros, cilantro, cebolla',
-    heat: 'Picoso',
-    heatLevel: 3,
+    description: 'Vibrante con tomatillo y chiles tatemados',
+    ingredients: 'Tomatillo, jalapeño tatemado, serrano tatemado y cilantro',
+    heat: '2 chiles',
+    heatLevel: 2,
     recommendedFor: 'Tacos, ceviche, ceviches, consome',
     image: '/images/salsa-tomatilla.jpg',
     color: '#9C27B0',
@@ -62,16 +65,51 @@ export const SALSAS = [
   {
     id: 'negra',
     name: 'Negra',
-    description: 'Oscura, ahumada y con profundidad de sabor',
-    ingredients: 'Chiles negros, tomate, ajo, especias ahumadas',
-    heat: 'Muy picoso',
+    description: 'Oscura y con profundidad de sabor',
+    ingredients: 'Habaneros tatemados, salsas negras y especias',
+    heat: '4 chiles',
     heatLevel: 4,
     recommendedFor: 'Para los valientes: tacos de barbacoa, huevos',
     image: '/images/salsa-negra.jpg',
     color: '#4A4A4A',
   },
+  // Próximas salsas (coming soon)
+  {
+    id: 'coming-soon-1',
+    name: 'Próximamente',
+    description: 'Estamos trabajando en más sabores',
+    ingredients: '...',
+    heat: '?',
+    heatLevel: 0,
+    recommendedFor: '',
+    image: '/images/coming-soon.jpg',
+    color: '#CCCCCC',
+  },
+  {
+    id: 'coming-soon-2',
+    name: 'Próximamente',
+    description: 'Estamos trabajando en más sabores',
+    ingredients: '...',
+    heat: '?',
+    heatLevel: 0,
+    recommendedFor: '',
+    image: '/images/coming-soon.jpg',
+    color: '#CCCCCC',
+  },
+  {
+    id: 'coming-soon-3',
+    name: 'Próximamente',
+    description: 'Estamos trabajando en más sabores',
+    ingredients: '...',
+    heat: '?',
+    heatLevel: 0,
+    recommendedFor: '',
+    image: '/images/coming-soon.jpg',
+    color: '#CCCCCC',
+  },
 ] as const;
 
+// Contenido de secciones
 export const COPY = {
   hero: {
     headline: 'Salsas artesanales hechas en Chihuahua',
@@ -87,10 +125,10 @@ export const COPY = {
   whyus: {
     title: '¿Por qué Red Hog?',
     benefits: [
-      'Elaboradas en Chihuahua',
+      'Recetas elaboradas en casa',
       'Preparadas en pequeños lotes',
-      'Cinco sabores para diferentes niveles de picor',
-      'Compra directa al productor',
+      'Sabores y Picores diferentes',
+      'Compra directa con el productor',
     ],
   },
   howToBuy: {
@@ -115,31 +153,48 @@ export const COPY = {
   },
   testimonials: {
     title: '¿Ya probaste Red Hog?',
-    cta: 'Comparte tu experiencia',
-    note: '[Testimonios reales - Reemplazar cuando estén disponibles]',
+    cta: 'Síguenos en nuestras redes',
+    note: 'Únete a nuestra comunidad en redes sociales y comparte tu experiencia',
+    networks: [
+      {
+        name: 'Facebook',
+        url: 'https://facebook.com/redhogfoods',
+        icon: 'f',
+      },
+      {
+        name: 'Instagram',
+        url: 'https://instagram.com/redhogfoods',
+        icon: 'i',
+      },
+      {
+        name: 'Google Maps',
+        url: 'https://maps.google.com/search/Red+Hog+Foods+Chihuahua',
+        icon: '📍',
+      },
+    ],
   },
   faq: {
     title: 'Preguntas frecuentes',
     items: [
       {
         question: '¿Dónde entregan?',
-        answer: '[PENDIENTE: Definir cobertura de entrega]',
+        answer: 'Realizamos entregas hasta Reliz y alrededores con envío gratis a domicilio o punto a convenir dentro de esta zona. Si es fuera de Reliz, de 3 envases en adelante llevamos a domicilio o punto a convenir establecido por ambas partes.',
       },
       {
         question: '¿Cómo puedo pagar?',
-        answer: 'Por WhatsApp confirmamos formas de pago: transferencia, Clip o efectivo en recolección.',
+        answer: 'Aceptamos: Efectivo, transferencia, tarjeta y Clip (recibimos un enlace por WhatsApp para pagar virtualmente).',
       },
       {
         question: '¿Necesitan refrigeración?',
-        answer: '[PENDIENTE: Confirmar condiciones de conservación]',
+        answer: 'Se recomienda refrigerar aunque no se haya abierto, dado que son ingredientes naturales. Nota: Salsas machas y chicharrón de chile (próximamente) pueden tener otras recomendaciones.',
       },
       {
         question: '¿Cuánto pican?',
-        answer: 'Tenemos desde Fresca (muy suave) hasta Negra (muy picosa). Explora cada una en nuestros sabores.',
+        answer: 'Todas tienen algún tipo de chile, unas más que otras. El picómetro viene señalizado en cada una de las opciones con un sistema de chiles (1-4).',
       },
       {
         question: '¿Manejan pedidos para restaurantes o eventos?',
-        answer: 'Sí, accede a nuestra sección de Mayoreo o contacta directamente por WhatsApp.',
+        answer: 'Claro que sí. Déjanos tus datos, nos ponemos en contacto contigo y cuadramos la operación según tus necesidades.',
       },
     ],
   },
