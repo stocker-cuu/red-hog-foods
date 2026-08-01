@@ -4,6 +4,20 @@ export const BRAND_NAME = 'Red Hog Foods';
 export const BRAND_SHORT = 'Red Hog';
 export const LOCATION = 'Chihuahua, Chihuahua, México';
 
+// Redes sociales — un solo lugar para editarlas
+export const SOCIAL = {
+  instagram: {
+    name: 'Instagram',
+    url: 'https://www.instagram.com/redhogsalsa/',
+    icon: '📸',
+  },
+  facebook: {
+    name: 'Facebook',
+    url: 'https://www.facebook.com/people/Red-Hog-Salsa/61574348140197/',
+    icon: '👍',
+  },
+} as const;
+
 // Presentaciones y precios
 export const PRESENTATIONS = {
   small: {
@@ -154,23 +168,7 @@ export const COPY = {
     title: '¿Ya probaste Red Hog?',
     cta: 'Síguenos en nuestras redes',
     note: 'Únete a nuestra comunidad en redes sociales y comparte tu experiencia',
-    networks: [
-      {
-        name: 'Facebook',
-        url: 'https://facebook.com/redhogfoods',
-        icon: 'f',
-      },
-      {
-        name: 'Instagram',
-        url: 'https://instagram.com/redhogfoods',
-        icon: 'i',
-      },
-      {
-        name: 'Google Maps',
-        url: 'https://maps.google.com/search/Red+Hog+Foods+Chihuahua',
-        icon: '📍',
-      },
-    ],
+    networks: [SOCIAL.instagram, SOCIAL.facebook],
   },
   faq: {
     title: 'Preguntas frecuentes',

@@ -20,9 +20,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-  icons: {
-    icon: '/favicon.ico',
-  },
+  // El favicon lo toma Next.js de app/icon.png y app/apple-icon.png
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

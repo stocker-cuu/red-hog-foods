@@ -30,7 +30,7 @@ export default function Header() {
                 width={512}
                 height={512}
                 priority
-                className="h-14 md:h-16 w-auto object-contain"
+                className="h-16 w-16 md:h-20 md:w-20 rounded-full object-cover"
               />
             </Link>
           </div>
