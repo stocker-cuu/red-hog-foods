@@ -1,36 +1,53 @@
 import type { Metadata } from 'next';
 import { Providers } from './providers';
+import { BRAND_NAME, SITE_URL } from '@/lib/data';
+import StructuredData from '@/components/StructuredData';
 import './globals.css';
 
+const TITLE = 'Red Hog Salsa | Salsas Artesanales de Chihuahua';
+const DESCRIPTION =
+  'Salsas artesanales hechas en Chihuahua. Cinco sabores para tacos, carne asada, botanas y todo lo que necesite más carácter. Pide por WhatsApp.';
+
 export const metadata: Metadata = {
-  title: 'Red Hog Foods | Salsas Artesanales de Chihuahua',
-  description: 'Salsas artesanales hechas en Chihuahua. Cinco sabores para tacos, carne asada, botanas y todo lo que necesite más carácter.',
-  keywords: 'salsas, artesanales, Chihuahua, México, picante, comida mexicana',
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  keywords: 'salsas artesanales, salsa picante, Chihuahua, México, carne asada, tacos',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: 'Red Hog Foods | Salsas Artesanales de Chihuahua',
-    description: 'Salsas artesanales hechas en Chihuahua. Cinco sabores para tacos, carne asada, botanas y todo lo que necesite más carácter.',
-    url: 'https://redhogfoods.com',
+    title: TITLE,
+    description: DESCRIPTION,
+    url: SITE_URL,
+    siteName: BRAND_NAME,
+    locale: 'es_MX',
     type: 'website',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Red Hog Foods',
+        alt: 'Frascos de salsa Red Hog',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ['/og-image.jpg'],
   },
   // El favicon lo toma Next.js de app/icon.png y app/apple-icon.png
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es">
+    <html lang="es-MX">
       <head>
-        <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="theme-color" content="#B21D1D" />
-        <link rel="canonical" href="https://redhogfoods.com" />
+        <StructuredData />
       </head>
       <body>
         <Providers>{children}</Providers>

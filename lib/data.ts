@@ -3,6 +3,8 @@ export const WHATSAPP_NUMBER = '526142315153'; // ✅ Chihuahua
 export const BRAND_NAME = 'Red Hog Foods';
 export const BRAND_SHORT = 'Red Hog';
 export const LOCATION = 'Chihuahua, Chihuahua, México';
+export const SITE_URL = 'https://redhogfoods.com';
+export const PHONE = '+52 614 231 5153'; // el que aparece en la etiqueta
 
 // Redes sociales — un solo lugar para editarlas
 export const SOCIAL = {
