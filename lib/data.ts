@@ -35,7 +35,7 @@ export const SALSAS = [
   {
     id: 'fresca',
     name: 'Fresca',
-    description: 'Verde, jugosa y con ingredientes frescos',
+    description: 'Rojiza y jugosa, con todo el ingrediente en crudo',
     ingredients: 'Tomate, jalapeño, serrano en crudo',
     heat: '2 chiles',
     heatLevel: 2,
