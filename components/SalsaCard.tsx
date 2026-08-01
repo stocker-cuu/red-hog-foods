@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { PRESENTATIONS } from '@/lib/data';
 import { formatPrice } from '@/lib/utils';
 import { useCart } from '@/app/providers/CartProvider';
@@ -18,6 +19,9 @@ export default function SalsaCard({ salsa }: SalsaCardProps) {
   const { addToCart } = useCart();
   const price = PRESENTATIONS[presentation].price;
 
+  // Las salsas en desarrollo todavía no se pueden pedir
+  const isComingSoon = salsa.heatLevel === 0;
+
   const handleAddToCart = () => {
     addToCart(salsa.id, presentation, quantity);
     setQuantity(1);
@@ -25,24 +29,31 @@ export default function SalsaCard({ salsa }: SalsaCardProps) {
     setTimeout(() => setJustAdded(false), 2000);
   };
 
+  if (isComingSoon) {
+    return (
+      <div className="card border-dashed flex flex-col items-center justify-center h-full min-h-[380px] bg-redhog-cream/40 p-8 text-center">
+        <div className="w-16 h-16 rounded-full border-2 border-dashed border-redhog-red/40 flex items-center justify-center mb-4">
+          <span className="text-2xl text-redhog-red/60">+</span>
+        </div>
+        <h3 className="font-bold text-lg mb-2">Próximamente</h3>
+        <p className="text-sm text-gray-600">Estamos preparando un nuevo sabor</p>
+      </div>
+    );
+  }
+
   return (
     <div className="card card-hover flex flex-col h-full">
-      <div className="w-full h-64 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center overflow-hidden relative">
-        <div className="text-center text-gray-500 p-4">
-          <div className="text-5xl mb-2" style={{ opacity: 0.3 }}>
-            🍯
-          </div>
-          <p className="text-xs">
-            {salsa.name}
-            <br />
-            <span className="text-gray-400">Reemplazar con salsa-{salsa.id}.jpg</span>
-          </p>
-        </div>
-        <div className="absolute top-3 right-3 bg-white rounded-full px-3 py-1 text-xs font-bold shadow-md">
-          <span>
-            {Array(salsa.heatLevel)
-              .fill('🌶️')
-              .join('')}
+      <div className="relative w-full aspect-square bg-gray-100">
+        <Image
+          src={salsa.image}
+          alt={`Salsa ${salsa.name} de Red Hog`}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover"
+        />
+        <div className="absolute top-3 right-3 bg-white/95 rounded-full px-3 py-1 text-xs font-bold shadow-md">
+          <span aria-label={`Nivel de picor: ${salsa.heatLevel} de 4`}>
+            {Array(salsa.heatLevel).fill('🌶️').join('')}
           </span>
         </div>
       </div>
@@ -85,8 +96,9 @@ export default function SalsaCard({ salsa }: SalsaCardProps) {
             <label className="text-xs font-semibold">Cantidad:</label>
             <div className="flex items-center border border-gray-300 rounded">
               <button
-                onClick={() => setQuantity(Math.max(0, quantity - 1))}
+                onClick={() => setQuantity(Math.max(1, quantity - 1))}
                 className="px-2 py-1 text-gray-600 hover:bg-gray-100"
+                aria-label="Quitar uno"
               >
                 −
               </button>
@@ -94,6 +106,7 @@ export default function SalsaCard({ salsa }: SalsaCardProps) {
               <button
                 onClick={() => setQuantity(quantity + 1)}
                 className="px-2 py-1 text-gray-600 hover:bg-gray-100"
+                aria-label="Agregar uno"
               >
                 +
               </button>
@@ -108,9 +121,7 @@ export default function SalsaCard({ salsa }: SalsaCardProps) {
             <button
               onClick={handleAddToCart}
               className={`w-full btn btn-small transition-all ${
-                justAdded
-                  ? 'bg-green-600 text-white'
-                  : 'bg-redhog-red text-white hover:bg-red-700'
+                justAdded ? 'bg-green-600 text-white' : 'bg-redhog-red text-white hover:bg-red-700'
               }`}
             >
               {justAdded ? '✓ Agregado' : 'Agregar al pedido'}

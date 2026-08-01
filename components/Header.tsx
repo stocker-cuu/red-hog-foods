@@ -24,15 +24,14 @@ export default function Header() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="#" className="flex items-center gap-2">
-              <div className="w-14 h-14 relative">
-                <Image
-                  src="/logo.jpg"
-                  alt="Red Hog"
-                  width={56}
-                  height={56}
-                  className="rounded-full object-cover"
-                />
-              </div>
+              <Image
+                src="/logo.jpg"
+                alt="Red Hog Salsa — Chihuahua, México"
+                width={512}
+                height={512}
+                priority
+                className="h-14 md:h-16 w-auto object-contain"
+              />
             </Link>
           </div>
 

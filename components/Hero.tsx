@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { COPY } from '@/lib/data';
 
 export default function Hero() {
@@ -42,15 +43,15 @@ export default function Hero() {
           </div>
 
           <div className="order-1 md:order-2 flex items-center justify-center">
-            <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-red-100 to-gray-100 flex items-center justify-center shadow-lg">
-              <div className="text-center text-gray-600 p-6">
-                <div className="text-6xl mb-3">🔴</div>
-                <p className="text-sm">
-                  Imagen de salsas y botellas
-                  <br />
-                  <span className="text-xs text-gray-500">Reemplazar con hero-image.jpg</span>
-                </p>
-              </div>
+            <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-gray-100 shadow-lg">
+              <Image
+                src="/hero-image.jpg"
+                alt="Frascos de salsa Red Hog sobre tabla de madera"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
             </div>
           </div>
         </div>

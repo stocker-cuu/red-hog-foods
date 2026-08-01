@@ -6,21 +6,29 @@ export default function Testimonials() {
   return (
     <section className="py-16 md:py-24 bg-white">
       <div className="container-max">
-        <div className="text-center space-y-6">
+        <div className="text-center space-y-8">
           <div>
             <h2 className="headline mb-3">{COPY.testimonials.title}</h2>
             <p className="subheadline">{COPY.testimonials.cta}</p>
           </div>
 
-          <div className="bg-blue-50 border-l-4 border-blue-400 rounded p-4 text-sm text-blue-800">
-            <p>{COPY.testimonials.note}</p>
-          </div>
+          <p className="text-gray-600">{COPY.testimonials.note}</p>
 
-          <p className="text-gray-600 text-sm">
-            Una vez que tengas testimonios reales, reemplaza el contenido de{' '}
-            <code className="bg-gray-100 px-2 py-1 rounded">COPY.testimonials</code> en{' '}
-            <code className="bg-gray-100 px-2 py-1 rounded">lib/data.ts</code>
-          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+            {COPY.testimonials.networks.map((network) => (
+              <a
+                key={network.name}
+                href={network.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-redhog-cream rounded-lg p-6 border-2 border-transparent hover:border-redhog-red hover:shadow-lg transition-all"
+              >
+                <div className="text-3xl mb-2">{network.icon}</div>
+                <p className="font-bold">{network.name}</p>
+                <p className="text-xs text-gray-600 mt-1">Déjanos tu reseña</p>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>
