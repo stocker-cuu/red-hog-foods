@@ -73,7 +73,6 @@ export const SALSAS = [
     image: '/images/salsa-negra.jpg',
     color: '#4A4A4A',
   },
-  // Próximas salsas (coming soon)
   {
     id: 'coming-soon-1',
     name: 'Próximamente',
@@ -178,7 +177,7 @@ export const COPY = {
     items: [
       {
         question: '¿Dónde entregan?',
-        answer: 'Realizamos entregas hasta Reliz y alrededores con envío gratis a domicilio o punto a convenir dentro de esta zona. Si es fuera de Reliz, de 3 envases en adelante llevamos a domicilio o punto a convenir establecido por ambas partes.',
+        answer: 'Realizamos entregas dentro de Zona El Reliz y alrededores o punto a convenir dentro de esta zona. Si es fuera de Reliz, de 3 envases en adelante llevamos a domicilio o punto a convenir establecido por ambas partes.',
       },
       {
         question: '¿Cómo puedo pagar?',
