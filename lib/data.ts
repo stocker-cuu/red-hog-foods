@@ -57,7 +57,7 @@ export const SALSAS = [
   {
     id: 'roja',
     name: 'Roja',
-    description: 'Clásica y balanceada',
+    description: 'La clásica de árbol pero con un toque más cremosito',
     ingredients: 'Tomate, chile de árbol tatemado y chiltepin',
     heat: '3 chiles',
     heatLevel: 3,
