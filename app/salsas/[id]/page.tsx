@@ -116,12 +116,19 @@ export default function SalsaPage({ params }: Props) {
               {salsa.pairings.length > 0 && (
                 <div>
                   <dt className="text-sm font-bold text-redhog-red mb-1">Con qué va bien</dt>
-                  <dd className="flex flex-wrap gap-2 pt-1">
-                    {salsa.pairings.map((p) => (
-                      <span key={p} className="bg-redhog-cream text-gray-800 text-sm rounded-full px-3 py-1">
-                        {p}
-                      </span>
-                    ))}
+                  <dd>
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {salsa.pairings.map((p) => (
+                        <span key={p} className="bg-redhog-cream text-gray-800 text-sm rounded-full px-3 py-1">
+                          {p}
+                        </span>
+                      ))}
+                    </div>
+                    {salsa.pairingNote && (
+                      <p className="mt-3 text-gray-700 border-l-2 border-redhog-red pl-3 italic">
+                        {salsa.pairingNote}
+                      </p>
+                    )}
                   </dd>
                 </div>
               )}

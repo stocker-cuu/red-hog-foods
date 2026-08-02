@@ -73,7 +73,7 @@ export default function SalsaCard({ salsa }: SalsaCardProps) {
           <p>{salsa.ingredients}</p>
         </div>
 
-        <p className="text-xs text-redhog-red font-semibold mb-2">👉 {salsa.pairings.join(', ')}</p>
+        <p className="text-xs text-redhog-red font-semibold mb-2">👉 {salsa.pairings.slice(0, 3).join(', ')}</p>
 
         <Link
           href={`/salsas/${salsa.id}`}

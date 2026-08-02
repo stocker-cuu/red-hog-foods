@@ -42,8 +42,10 @@ export interface Salsa {
   heat: string;
   /** 0 = próximamente (todavía no se vende), 1 a 4 = chiles de picor */
   heatLevel: number;
-  /** Con qué va bien */
+  /** Etiquetas cortas para la tarjeta del catálogo */
   pairings: readonly string[];
+  /** Recomendación en palabras de Wero, se muestra en la página de la salsa */
+  pairingNote?: string;
   /** Solo si esta salsa necesita algo distinto a CONSERVACION_DEFAULT */
   storage?: string;
   image: string;
