@@ -1,7 +1,7 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Flavors from '@/components/Flavors';
-import WhyUs from '@/components/WhyUs';
+import About from '@/components/About';
 import HowToBuy from '@/components/HowToBuy';
 import Cart from '@/components/Cart';
 import Testimonials from '@/components/Testimonials';
@@ -15,7 +15,7 @@ export default function Home() {
       <Header />
       <Hero />
       <Flavors />
-      <WhyUs />
+      <About />
       <HowToBuy />
       <Cart />
       <Testimonials />

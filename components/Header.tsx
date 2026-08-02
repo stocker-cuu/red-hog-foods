@@ -44,6 +44,12 @@ export default function Header() {
               Sabores
             </button>
             <button
+              onClick={() => scrollToSection('quienes-somos')}
+              className="text-gray-700 hover:text-redhog-red transition-colors"
+            >
+              Quiénes somos
+            </button>
+            <button
               onClick={() => scrollToSection('como-comprar')}
               className="text-gray-700 hover:text-redhog-red transition-colors"
             >
@@ -91,6 +97,12 @@ export default function Header() {
               className="block w-full text-left px-4 py-2 rounded-lg hover:bg-gray-100"
             >
               Sabores
+            </button>
+            <button
+              onClick={() => scrollToSection('quienes-somos')}
+              className="block w-full text-left px-4 py-2 rounded-lg hover:bg-gray-100"
+            >
+              Quiénes somos
             </button>
             <button
               onClick={() => scrollToSection('como-comprar')}

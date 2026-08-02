@@ -7,7 +7,13 @@
       "Bash(curl -sI -m 15 https://redhogfoods.com)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(curl -sI -m 20 https://redhog-foods.netlify.app)",
+      "Bash(curl -sI -m 20 https://www.redhogfoods.com)",
+      "Bash(curl -s -m 20 https://redhogfoods.com)",
+      "Bash(curl -sI -m 20 https://redhogfoods.com)",
+      "Bash(curl -s -m 20 https://redhogfoods.com/robots.txt)",
+      "Bash(curl -s -m 20 https://redhogfoods.com/sitemap.xml)"
     ]
   }
 }

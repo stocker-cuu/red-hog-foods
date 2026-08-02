@@ -137,12 +137,19 @@ export const COPY = {
     title: 'Nuestros sabores',
     subtitle: 'Desde lo suave hasta lo retador',
   },
-  whyus: {
-    title: '¿Por qué Red Hog?',
+  about: {
+    title: 'Quién hace tus salsas',
+    image: '/quienes-somos.jpg',
+    imageAlt: 'Los cinco sabores de Red Hog Salsa',
+    paragraphs: [
+      'Me llamo César, aunque casi todos me dicen Wero. Red Hog nació en una carne asada: unos amigos probaron mi salsa y no me dejaron en paz hasta que la vendiera.',
+      'Preparo cada lote como si fuera para mi propia mesa. Unas son las recetas de siempre con un twist que se me ocurrió probando, y otras salieron puras de experimentar.',
+      'Eso sí: una salsa tiene que picar. Si no, pídeme mermelada.',
+    ],
     benefits: [
       'Recetas elaboradas en casa',
       'Preparadas en pequeños lotes',
-      'Sabores y Picores diferentes',
+      'Sabores y picores diferentes',
       'Compra directa con el productor',
     ],
   },
