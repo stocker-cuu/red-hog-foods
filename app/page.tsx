@@ -8,6 +8,7 @@ import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import Wholesale from '@/components/Wholesale';
 import Footer from '@/components/Footer';
+import FloatingCartBar from '@/components/FloatingCartBar';
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <FAQ />
       <Wholesale />
       <Footer />
+      <FloatingCartBar />
     </main>
   );
 }

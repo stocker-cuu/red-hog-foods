@@ -74,7 +74,7 @@ export const SALSAS = [
     ingredients: 'Tomatillo, jalapeño tatemado, serrano tatemado y cilantro',
     heat: '2 chiles',
     heatLevel: 2,
-    recommendedFor: 'Tacos, ceviche, ceviches, consome',
+    recommendedFor: 'Tacos, ceviches, consomé',
     image: '/images/salsa-tomatilla.jpg',
     color: '#9C27B0',
   },

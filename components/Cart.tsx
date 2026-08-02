@@ -10,31 +10,26 @@ export default function Cart() {
   const { cart, updateCartItem, removeFromCart } = useCart();
   const [showCheckout, setShowCheckout] = useState(false);
 
-  if (!showCheckout && cart.items.length === 0) {
+  if (cart.items.length === 0) {
     return (
-      <section className="py-16 md:py-24 bg-redhog-cream">
+      <section id="pedido" className="py-16 md:py-24 bg-redhog-cream scroll-mt-24">
         <div className="container-max text-center">
           <div className="mb-6 text-6xl">🛒</div>
           <h2 className="headline mb-3">{COPY.cart.empty}</h2>
-          <p className="subheadline">{COPY.cart.emptyDescription}</p>
+          <p className="subheadline mb-8">{COPY.cart.emptyDescription}</p>
+          <button
+            onClick={() => document.getElementById('sabores')?.scrollIntoView({ behavior: 'smooth' })}
+            className="btn btn-primary btn-large"
+          >
+            Ver los sabores
+          </button>
         </div>
       </section>
     );
   }
 
-  if (showCheckout) {
-    return (
-      <CheckoutModal
-        onClose={() => setShowCheckout(false)}
-        onSuccess={() => {
-          setShowCheckout(false);
-        }}
-      />
-    );
-  }
-
   return (
-    <section id="pedido" className="py-16 md:py-24 bg-redhog-cream">
+    <section id="pedido" className="py-16 md:py-24 bg-redhog-cream scroll-mt-24">
       <div className="container-max">
         <h2 className="headline mb-8">Tu pedido</h2>
 
@@ -95,6 +90,10 @@ export default function Cart() {
           {COPY.cart.ctaWhatsApp}
         </button>
       </div>
+
+      {showCheckout && (
+        <CheckoutModal onClose={() => setShowCheckout(false)} onSuccess={() => setShowCheckout(false)} />
+      )}
     </section>
   );
 }
