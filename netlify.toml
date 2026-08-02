@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+
+# El sitio vive en redhogfoods.com. Todo lo que llegue al subdominio de Netlify
+# se manda al dominio oficial para no dividir el SEO entre dos direcciones.
+[[redirects]]
+  from = "https://redhog-foods.netlify.app/*"
+  to = "https://redhogfoods.com/:splat"
+  status = 301
+  force = true

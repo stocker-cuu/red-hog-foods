@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(openssl s_client -connect redhogfoods.com:443 -servername redhogfoods.com)",
+      "Bash(openssl x509 *)",
+      "Bash(curl -sI -m 15 https://redhogfoods.com)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }
