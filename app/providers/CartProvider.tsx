@@ -56,8 +56,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
       let newItems: CartItem[];
       if (existingIndex >= 0) {
-        newItems = [...prev.items];
-        newItems[existingIndex].quantity += quantity;
+        // Se reemplaza el renglón por uno nuevo: mutar el original desincroniza el total
+        newItems = prev.items.map((item, i) =>
+          i === existingIndex ? { ...item, quantity: item.quantity + quantity } : item
+        );
       } else {
         newItems = [
           ...prev.items,
@@ -82,12 +84,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setCart((prev) => {
       if (index < 0 || index >= prev.items.length) return prev;
 
-      const newItems = [...prev.items];
-      if (quantity === 0) {
-        newItems.splice(index, 1);
-      } else {
-        newItems[index].quantity = quantity;
-      }
+      const newItems =
+        quantity === 0
+          ? prev.items.filter((_, i) => i !== index)
+          : prev.items.map((item, i) => (i === index ? { ...item, quantity } : item));
 
       const { total, totalJars } = calculateCartTotal(newItems);
       return { items: newItems, total, totalJars };

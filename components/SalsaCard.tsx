@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { PRESENTATIONS } from '@/lib/data';
 import { formatPrice } from '@/lib/utils';
 import { useCart } from '@/app/providers/CartProvider';
@@ -43,23 +44,25 @@ export default function SalsaCard({ salsa }: SalsaCardProps) {
 
   return (
     <div className="card card-hover flex flex-col h-full">
-      <div className="relative w-full aspect-square bg-gray-100">
+      <Link href={`/salsas/${salsa.id}`} className="group relative w-full aspect-square bg-gray-100 block">
         <Image
           src={salsa.image}
           alt={`Salsa ${salsa.name} de Red Hog`}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover"
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
         <div className="absolute top-3 right-3 bg-white/95 rounded-full px-3 py-1 text-xs font-bold shadow-md">
           <span aria-label={`Nivel de picor: ${salsa.heatLevel} de 4`}>
             {Array(salsa.heatLevel).fill('🌶️').join('')}
           </span>
         </div>
-      </div>
+      </Link>
 
       <div className="p-4 flex flex-col flex-grow">
-        <h3 className="font-bold text-lg mb-1">{salsa.name}</h3>
+        <Link href={`/salsas/${salsa.id}`} className="hover:text-redhog-red transition-colors">
+          <h3 className="font-bold text-lg mb-1">{salsa.name}</h3>
+        </Link>
 
         <p className="text-xs text-gray-600 mb-3">{salsa.heat}</p>
 
@@ -70,7 +73,14 @@ export default function SalsaCard({ salsa }: SalsaCardProps) {
           <p>{salsa.ingredients}</p>
         </div>
 
-        <p className="text-xs text-redhog-red font-semibold mb-4">👉 {salsa.recommendedFor}</p>
+        <p className="text-xs text-redhog-red font-semibold mb-2">👉 {salsa.pairings.join(', ')}</p>
+
+        <Link
+          href={`/salsas/${salsa.id}`}
+          className="text-xs font-semibold text-gray-700 underline underline-offset-2 hover:text-redhog-red mb-4"
+        >
+          Ver detalles de la {salsa.name}
+        </Link>
 
         <div className="border-t border-gray-200 my-3 pt-3 mt-auto space-y-3">
           <div className="space-y-2">

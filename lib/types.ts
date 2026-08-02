@@ -40,8 +40,12 @@ export interface Salsa {
   description: string;
   ingredients: string;
   heat: string;
+  /** 0 = próximamente (todavía no se vende), 1 a 4 = chiles de picor */
   heatLevel: number;
-  recommendedFor: string;
+  /** Con qué va bien */
+  pairings: readonly string[];
+  /** Solo si esta salsa necesita algo distinto a CONSERVACION_DEFAULT */
+  storage?: string;
   image: string;
   color: string;
 }

@@ -1,3 +1,5 @@
+import type { Salsa } from './types';
+
 // Configuración centralizada
 export const WHATSAPP_NUMBER = '526142315153'; // ✅ Chihuahua
 export const BRAND_NAME = 'Red Hog Foods';
@@ -39,8 +41,16 @@ export const PRESENTATIONS = {
   },
 } as const;
 
+/**
+ * Recomendación de conservación que aplica a todas las salsas.
+ * Tomada del mismo texto de Preguntas Frecuentes: si cambia, cámbiala en los dos lados.
+ * Si alguna salsa necesita una indicación distinta, ponle su propio campo `storage`.
+ */
+export const CONSERVACION_DEFAULT =
+  'Se recomienda refrigerar aunque no se haya abierto, dado que son ingredientes naturales.';
+
 // Productos
-export const SALSAS = [
+export const SALSAS: readonly Salsa[] = [
   {
     id: 'fresca',
     name: 'Fresca',
@@ -48,7 +58,7 @@ export const SALSAS = [
     ingredients: 'Tomate, jalapeño, serrano en crudo',
     heat: '2 chiles',
     heatLevel: 2,
-    recommendedFor: 'Pescados, mariscos, botanas frescas',
+    pairings: ['Pescados', 'mariscos', 'botanas frescas'],
     image: '/images/salsa-fresca.jpg',
     color: '#8BC34A',
   },
@@ -59,7 +69,7 @@ export const SALSAS = [
     ingredients: 'Chiles güeros, chile habanero y especias',
     heat: '2 chiles',
     heatLevel: 2,
-    recommendedFor: 'Tacos al pastor, quesadillas, carne asada',
+    pairings: ['Tacos al pastor', 'quesadillas', 'carne asada'],
     image: '/images/salsa-guera.jpg',
     color: '#FFC107',
   },
@@ -70,7 +80,7 @@ export const SALSAS = [
     ingredients: 'Tomate, chile de árbol tatemado y chiltepin',
     heat: '3 chiles',
     heatLevel: 3,
-    recommendedFor: 'Carne asada, enchiladas, chilaquiles',
+    pairings: ['Carne asada', 'enchiladas', 'chilaquiles'],
     image: '/images/salsa-roja.jpg',
     color: '#DC2626',
   },
@@ -81,7 +91,7 @@ export const SALSAS = [
     ingredients: 'Tomatillo, jalapeño tatemado, serrano tatemado y cilantro',
     heat: '2 chiles',
     heatLevel: 2,
-    recommendedFor: 'Tacos, ceviches, consomé',
+    pairings: ['Tacos', 'ceviches', 'consomé'],
     image: '/images/salsa-tomatilla.jpg',
     color: '#9C27B0',
   },
@@ -92,7 +102,7 @@ export const SALSAS = [
     ingredients: 'Habaneros tatemados, salsas negras y especias',
     heat: '4 chiles',
     heatLevel: 4,
-    recommendedFor: 'Para los valientes: tacos de barbacoa, huevos',
+    pairings: ['Tacos de barbacoa', 'huevos', 'carnes rojas'],
     image: '/images/salsa-negra.jpg',
     color: '#4A4A4A',
   },
@@ -103,7 +113,7 @@ export const SALSAS = [
     ingredients: '...',
     heat: '?',
     heatLevel: 0,
-    recommendedFor: '',
+    pairings: [],
     image: '/images/coming-soon.jpg',
     color: '#CCCCCC',
   },
@@ -114,7 +124,7 @@ export const SALSAS = [
     ingredients: '...',
     heat: '?',
     heatLevel: 0,
-    recommendedFor: '',
+    pairings: [],
     image: '/images/coming-soon.jpg',
     color: '#CCCCCC',
   },
@@ -125,11 +135,11 @@ export const SALSAS = [
     ingredients: '...',
     heat: '?',
     heatLevel: 0,
-    recommendedFor: '',
+    pairings: [],
     image: '/images/coming-soon.jpg',
     color: '#CCCCCC',
   },
-] as const;
+];
 
 // Contenido de secciones
 export const COPY = {

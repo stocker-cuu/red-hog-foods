@@ -40,7 +40,13 @@ export default function FloatingCartBar() {
   if (cart.totalJars === 0 || pedidoVisible) return null;
 
   const irAlPedido = () => {
-    document.getElementById('pedido')?.scrollIntoView({ behavior: 'smooth' });
+    const seccion = document.getElementById('pedido');
+    if (seccion) {
+      seccion.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // En la página de una salsa el pedido vive en la portada
+      window.location.href = '/#pedido';
+    }
   };
 
   const productos = `${cart.totalJars} ${cart.totalJars === 1 ? 'producto' : 'productos'}`;
