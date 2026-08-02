@@ -16,7 +16,10 @@
       "Bash(curl -s -m 20 https://redhogfoods.com/sitemap.xml)",
       "Bash(npm run *)",
       "Bash(curl -sf -o /dev/null http://localhost:3000/salsas/negra)",
-      "Bash(curl -s http://localhost:3000/salsas/negra)"
+      "Bash(curl -s http://localhost:3000/salsas/negra)",
+      "Bash(curl -sf -o /dev/null http://localhost:3000)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(python3 -c ' *)"
     ]
   }
 }

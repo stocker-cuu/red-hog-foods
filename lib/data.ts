@@ -21,13 +21,24 @@ export const SOCIAL = {
     name: 'Instagram',
     url: 'https://www.instagram.com/redhogsalsa/',
     icon: '📸',
+    cta: 'Síguenos y mira lo nuevo',
   },
   facebook: {
     name: 'Facebook',
     url: 'https://www.facebook.com/people/Red-Hog-Salsa/61574348140197/',
     icon: '👍',
+    cta: 'Danos like y comenta',
+  },
+  google: {
+    name: 'Google',
+    url: 'https://g.page/r/CSHyV3wji0lfEBM/review',
+    icon: '⭐',
+    cta: 'Califícanos con estrellas',
   },
 } as const;
+
+/** Identificador de la ficha en Google Maps. Se necesita para leer reseñas con la API de Places. */
+export const GOOGLE_PLACE_ID = 'ChIJw88gT5Vd6oYRIfJXfCOLSV8';
 
 // Presentaciones y precios
 export const PRESENTATIONS = {
@@ -202,9 +213,9 @@ export const COPY = {
   },
   testimonials: {
     title: '¿Ya probaste Red Hog?',
-    cta: 'Síguenos en nuestras redes',
-    note: 'Únete a nuestra comunidad en redes sociales y comparte tu experiencia',
-    networks: [SOCIAL.instagram, SOCIAL.facebook],
+    cta: 'Cuéntanos qué te pareció',
+    note: 'Tu reseña nos ayuda a que más gente en Chihuahua nos encuentre.',
+    networks: [SOCIAL.google, SOCIAL.instagram, SOCIAL.facebook],
   },
   faq: {
     title: 'Preguntas frecuentes',

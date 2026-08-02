@@ -1,4 +1,4 @@
-import { BRAND_NAME, LOCATION, PHONE, PRESENTATIONS, SALSAS, SITE_URL, SOCIAL } from '@/lib/data';
+import { BRAND_NAME, GOOGLE_PLACE_ID, LOCATION, PHONE, PRESENTATIONS, SALSAS, SITE_URL, SOCIAL } from '@/lib/data';
 
 /**
  * Datos estructurados para buscadores (schema.org).
@@ -21,7 +21,13 @@ export default function StructuredData() {
       addressRegion: 'Chihuahua',
       addressCountry: 'MX',
     },
-    sameAs: [SOCIAL.instagram.url, SOCIAL.facebook.url],
+    // Sin aggregateRating a propósito: Google no permite que un negocio publique
+    // sus propias calificaciones como datos estructurados.
+    sameAs: [
+      SOCIAL.instagram.url,
+      SOCIAL.facebook.url,
+      `https://www.google.com/maps/place/?q=place_id:${GOOGLE_PLACE_ID}`,
+    ],
   };
 
   const products = SALSAS.filter((s) => s.heatLevel > 0).map((salsa) => ({

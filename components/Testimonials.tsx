@@ -25,7 +25,7 @@ export default function Testimonials() {
               >
                 <div className="text-3xl mb-2">{network.icon}</div>
                 <p className="font-bold">{network.name}</p>
-                <p className="text-xs text-gray-600 mt-1">Déjanos tu reseña</p>
+                <p className="text-xs text-gray-600 mt-1">{network.cta}</p>
               </a>
             ))}
           </div>
