@@ -1,4 +1,4 @@
-import { PRESENTATIONS, SALSAS, WHATSAPP_NUMBER } from './data';
+import { DELIVERY, PRESENTATIONS, SALSAS, WHATSAPP_NUMBER } from './data';
 import type { Cart, CheckoutData, CartItem } from './types';
 
 export function generateWhatsAppMessage(cart: Cart, checkout: CheckoutData, isWholesale: boolean = false): string {
@@ -15,20 +15,40 @@ export function generateWhatsAppMessage(cart: Cart, checkout: CheckoutData, isWh
     })
     .join('\n');
 
-  const message = `Hola, Red Hog. Quiero hacer este pedido:
-${items}
+  const esEntrega = checkout.delivery === 'delivery';
 
-*Total: \$${cart.total} MXN*
+  const lineas = [
+    'Hola, Red Hog. Quiero hacer este pedido:',
+    items,
+    '',
+    `*Total: \$${cart.total} MXN*`,
+    '',
+    '*Datos:*',
+    `Nombre: ${checkout.name}`,
+    `Zona/colonia: ${checkout.zone}`,
+    `Entrega o recolección: ${esEntrega ? 'Entrega a domicilio' : `Recolección en ${DELIVERY.puntoRecoleccion}`}`,
+  ];
 
-*Datos:*
-Nombre: ${checkout.name}
-Zona/colonia: ${checkout.zone}
-Entrega o recolección: ${checkout.delivery === 'delivery' ? 'Entrega a domicilio' : 'Recolección'}
-${checkout.comments ? `Comentarios: ${checkout.comments}` : ''}
+  if (esEntrega) {
+    lineas.push(`Zona de reparto: ${checkout.inZone ? `dentro de ${DELIVERY.zonaNombre}` : 'fuera de la zona regular'}`);
+  }
 
-Quedo pendiente de confirmar disponibilidad, costo de entrega y forma de pago.`;
+  if (esEntrega && checkout.address.trim()) {
+    lineas.push(`Dirección: ${checkout.address.trim()}`);
+  }
 
-  return encodeURIComponent(message);
+  const mapa = getMapsLink(checkout);
+  if (esEntrega && mapa) {
+    lineas.push(`Ubicación: ${mapa}`);
+  }
+
+  if (checkout.comments.trim()) {
+    lineas.push(`Comentarios: ${checkout.comments.trim()}`);
+  }
+
+  lineas.push('', 'Quedo pendiente de confirmar disponibilidad, costo de entrega y forma de pago.');
+
+  return encodeURIComponent(lineas.join('\n'));
 }
 
 function generateWholesaleMessage(checkout: CheckoutData): string {
@@ -46,6 +66,26 @@ Me gustaría conocer opciones de volumen, precios especiales y disponibilidad.`;
 
 export function getWhatsAppLink(message: string): string {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+}
+
+/**
+ * Link de Google Maps para llegar al cliente.
+ * Si compartió su ubicación usa las coordenadas exactas (el pin cae en el punto real);
+ * si no, arma una búsqueda con la dirección que escribió.
+ */
+export function getMapsLink(checkout: CheckoutData): string | null {
+  if (checkout.coords) {
+    const { lat, lng } = checkout.coords;
+    return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+  }
+
+  const partes = [checkout.address, checkout.zone, 'Chihuahua, Chihuahua, México']
+    .map((p) => p.trim())
+    .filter(Boolean);
+
+  if (!checkout.address.trim()) return null;
+
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(partes.join(', '))}`;
 }
 
 export function formatPrice(price: number): string {

@@ -10,7 +10,10 @@ export default function Wholesale() {
   const [formData, setFormData] = useState<CheckoutData>({
     name: '',
     zone: '',
+    address: '',
+    coords: null,
     delivery: 'delivery',
+    inZone: true,
     comments: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -44,7 +47,7 @@ export default function Wholesale() {
 
     setTimeout(() => {
       setShowForm(false);
-      setFormData({ name: '', zone: '', delivery: 'delivery', comments: '' });
+      setFormData({ name: '', zone: '', address: '', coords: null, delivery: 'delivery', inZone: true, comments: '' });
       setIsSubmitting(false);
       alert('Tu solicitud fue enviada. Un miembro de Red Hog se pondrá en contacto pronto.');
     }, 500);

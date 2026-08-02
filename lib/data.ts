@@ -4,6 +4,13 @@ export const BRAND_NAME = 'Red Hog Foods';
 export const BRAND_SHORT = 'Red Hog';
 export const LOCATION = 'Chihuahua, Chihuahua, México';
 export const SITE_URL = 'https://redhogfoods.com';
+
+// Reglas de entrega — edita aquí si cambian tus zonas, el mínimo o el punto de recolección
+export const DELIVERY = {
+  zonaNombre: 'Zona El Reliz y alrededores',
+  minFrascosFueraDeZona: 3,
+  puntoRecoleccion: 'Alsuper Reliz',
+} as const;
 export const PHONE = '+52 614 231 5153'; // el que aparece en la etiqueta
 
 // Redes sociales — un solo lugar para editarlas

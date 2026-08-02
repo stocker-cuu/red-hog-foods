@@ -14,10 +14,23 @@ export interface Cart {
   totalJars: number;
 }
 
+export interface Coords {
+  lat: number;
+  lng: number;
+  /** Precisión aproximada en metros que reporta el navegador */
+  accuracy: number;
+}
+
 export interface CheckoutData {
   name: string;
   zone: string;
+  /** Calle y número. Solo se pide cuando es entrega a domicilio. */
+  address: string;
+  /** Ubicación compartida por el cliente desde su celular (opcional) */
+  coords: Coords | null;
   delivery: 'delivery' | 'pickup';
+  /** Si el domicilio cae dentro de la zona regular de reparto */
+  inZone: boolean;
   comments: string;
 }
 
