@@ -20,19 +20,19 @@ export const SOCIAL = {
   instagram: {
     name: 'Instagram',
     url: 'https://www.instagram.com/redhogsalsa/',
-    icon: '📸',
+    brand: 'instagram',
     cta: 'Síguenos y mira lo nuevo',
   },
   facebook: {
     name: 'Facebook',
     url: 'https://www.facebook.com/people/Red-Hog-Salsa/61574348140197/',
-    icon: '👍',
+    brand: 'facebook',
     cta: 'Danos like y comenta',
   },
   google: {
     name: 'Google',
     url: 'https://g.page/r/CSHyV3wji0lfEBM/review',
-    icon: '⭐',
+    brand: 'google',
     cta: 'Califícanos con estrellas',
   },
 } as const;

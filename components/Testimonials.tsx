@@ -1,6 +1,7 @@
 'use client';
 
 import { COPY } from '@/lib/data';
+import { BrandIcon } from './BrandIcons';
 
 export default function Testimonials() {
   return (
@@ -23,7 +24,9 @@ export default function Testimonials() {
                 rel="noopener noreferrer"
                 className="bg-redhog-cream rounded-lg p-6 border-2 border-transparent hover:border-redhog-red hover:shadow-lg transition-all"
               >
-                <div className="text-3xl mb-2">{network.icon}</div>
+                <div className="flex justify-center mb-3">
+                  <BrandIcon brand={network.brand} className="w-9 h-9" />
+                </div>
                 <p className="font-bold">{network.name}</p>
                 <p className="text-xs text-gray-600 mt-1">{network.cta}</p>
               </a>

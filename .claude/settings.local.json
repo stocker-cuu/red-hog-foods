@@ -19,7 +19,9 @@
       "Bash(curl -s http://localhost:3000/salsas/negra)",
       "Bash(curl -sf -o /dev/null http://localhost:3000)",
       "Bash(curl -s http://localhost:3000)",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(python3 -)",
+      "Bash(sed -n '/export const SOCIAL/,/} as const;/p' lib/data.ts)"
     ]
   }
 }
