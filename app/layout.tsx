@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Providers } from './providers';
 import { BRAND_NAME, SITE_URL } from '@/lib/data';
 import StructuredData from '@/components/StructuredData';
+import Analytics from '@/components/Analytics';
 import './globals.css';
 
 const TITLE = 'Red Hog Salsa | Salsas Artesanales de Chihuahua';
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <Providers>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );

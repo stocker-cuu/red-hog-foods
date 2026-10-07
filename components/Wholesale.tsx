@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { COPY } from '@/lib/data';
 import { generateWhatsAppMessage, getWhatsAppLink } from '@/lib/utils';
+import { registrarEvento } from './Analytics';
 import type { CheckoutData } from '@/lib/types';
 
 export default function Wholesale() {
@@ -35,6 +36,7 @@ export default function Wholesale() {
     }
 
     setIsSubmitting(true);
+    registrarEvento('solicitud_mayoreo');
 
     const message = generateWhatsAppMessage(
       { items: [], total: 0, totalJars: 0 },

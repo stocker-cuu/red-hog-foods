@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { COPY, DELIVERY } from '@/lib/data';
 import { generateWhatsAppMessage, getWhatsAppLink } from '@/lib/utils';
 import { useCart } from '@/app/providers/CartProvider';
+import { registrarEvento } from './Analytics';
 import type { CheckoutData } from '@/lib/types';
 
 interface CheckoutModalProps {
@@ -91,6 +92,14 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
     if (bloqueadoPorZona) return;
 
     setIsSubmitting(true);
+
+    registrarEvento('enviar_pedido_whatsapp', {
+      value: cart.total,
+      currency: 'MXN',
+      frascos: cart.totalJars,
+      entrega: formData.delivery,
+      compartio_ubicacion: formData.coords !== null,
+    });
 
     const message = generateWhatsAppMessage(cart, formData, false);
     window.open(getWhatsAppLink(message), '_blank');

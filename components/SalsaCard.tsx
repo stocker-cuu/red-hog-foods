@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { PRESENTATIONS } from '@/lib/data';
 import { formatPrice } from '@/lib/utils';
 import { useCart } from '@/app/providers/CartProvider';
+import { registrarEvento } from './Analytics';
 import type { PresentationKey, Salsa } from '@/lib/types';
 
 interface SalsaCardProps {
@@ -25,6 +26,13 @@ export default function SalsaCard({ salsa }: SalsaCardProps) {
 
   const handleAddToCart = () => {
     addToCart(salsa.id, presentation, quantity);
+    registrarEvento('agregar_al_carrito', {
+      salsa: salsa.name,
+      presentacion: PRESENTATIONS[presentation].volume,
+      cantidad: quantity,
+      value: price * quantity,
+      currency: 'MXN',
+    });
     setQuantity(1);
     setJustAdded(true);
     setTimeout(() => setJustAdded(false), 2000);
