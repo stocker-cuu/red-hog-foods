@@ -71,7 +71,10 @@ export default function Footer() {
 
         <div className="border-t border-gray-700 pt-8">
           <p className="text-center text-gray-400 text-sm">
-            © {currentYear} {BRAND_NAME}. Todos los derechos reservados.
+            © {currentYear} {BRAND_NAME}. Todos los derechos reservados. ·{' '}
+            <a href="/aviso-de-privacidad" className="underline hover:text-white">
+              Aviso de privacidad
+            </a>
           </p>
         </div>
       </div>

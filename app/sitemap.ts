@@ -19,5 +19,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     ...paginasDeSalsas,
+    {
+      url: `${SITE_URL}/aviso-de-privacidad`,
+      lastModified: ahora,
+      changeFrequency: 'yearly',
+      priority: 0.2,
+    },
   ];
 }

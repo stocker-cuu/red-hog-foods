@@ -201,7 +201,10 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
               required
             />
             <p className="mt-1 text-xs text-gray-500">
-              Solo lo usamos para confirmar y dar seguimiento a tu pedido. No lo compartimos con nadie.
+              Solo lo usamos para confirmar y dar seguimiento a tu pedido. No lo compartimos con nadie.{' '}
+              <a href="/aviso-de-privacidad" target="_blank" rel="noopener noreferrer" className="underline hover:text-redhog-red">
+                Aviso de privacidad
+              </a>
             </p>
           </div>
 
