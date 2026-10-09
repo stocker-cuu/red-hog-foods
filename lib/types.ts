@@ -25,6 +25,10 @@ export interface CheckoutData {
   name: string;
   /** WhatsApp del cliente, 10 dígitos */
   phone: string;
+  /** Correo opcional, solo si quiere recibir promociones por correo */
+  email?: string;
+  /** Si aceptó recibir novedades y promociones (casilla desmarcada por defecto) */
+  acceptsPromos?: boolean;
   zone: string;
   /** Calle y número. Solo se pide cuando es entrega a domicilio. */
   address: string;

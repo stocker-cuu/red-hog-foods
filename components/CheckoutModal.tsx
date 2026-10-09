@@ -350,6 +350,39 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
             />
           </div>
 
+          {/* Permiso para promociones: siempre desmarcado, el cliente decide */}
+          <div className="rounded-lg border border-gray-200 p-3 space-y-3">
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={!!formData.acceptsPromos}
+                onChange={(e) => setFormData((p) => ({ ...p, acceptsPromos: e.target.checked }))}
+                className="mt-1 h-4 w-4 accent-redhog-red"
+              />
+              <span className="text-sm text-gray-800">
+                Avísenme de nuevos sabores, lotes y promociones por WhatsApp o mensaje.
+                <span className="block text-xs text-gray-500">Puedes darte de baja cuando quieras.</span>
+              </span>
+            </label>
+            {formData.acceptsPromos && (
+              <div>
+                <label htmlFor="email" className="block text-xs font-semibold mb-1">
+                  ¿También por correo? (opcional)
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  value={formData.email ?? ''}
+                  onChange={handleChange}
+                  className={inputClass}
+                  placeholder="tucorreo@ejemplo.com"
+                />
+              </div>
+            )}
+          </div>
+
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
             <p className="text-xs text-gray-700 whitespace-pre-line">{COPY.checkout.disclaimer}</p>
           </div>

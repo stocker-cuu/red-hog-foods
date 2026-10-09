@@ -31,7 +31,7 @@ export const PHONE = '+52 614 231 5153'; // el que aparece en la etiqueta
 export const PRIVACIDAD = {
   responsable: 'César Aguirre, quien opera Red Hog Foods',
   domicilio: 'Chihuahua, Chih.',
-  actualizado: '9 de octubre de 2026',
+  actualizado: '10 de octubre de 2026',
 } as const;
 
 // Redes sociales — un solo lugar para editarlas

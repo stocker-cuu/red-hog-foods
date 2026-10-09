@@ -95,6 +95,8 @@ export async function crearPedido(cart: Cart, form: CheckoutData): Promise<{ fol
       en_zona: esEntrega ? form.inZone : null,
       ubicacion: esEntrega ? getMapsLink(form) : null,
       comentarios: form.comments,
+      email: form.acceptsPromos ? form.email || '' : '',
+      acepta_promos: !!form.acceptsPromos,
       items: itemsParaApp(cart),
       carrito_id: carritoId(),
     },

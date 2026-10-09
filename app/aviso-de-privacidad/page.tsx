@@ -52,6 +52,7 @@ export default function AvisoDePrivacidad() {
             <li>Colonia o zona y, si pides entrega a domicilio, tu dirección.</li>
             <li>Tu ubicación, solo si decides compartirla con el botón “Compartir mi ubicación exacta”.</li>
             <li>Los comentarios que escribas y las salsas que elijas.</li>
+            <li>Tu correo electrónico, solo si aceptas recibir promociones y decides darnos uno.</li>
           </ul>
           <p>
             Tu nombre, WhatsApp y colonia se guardan desde que los escribes en el formulario, aunque no termines de
@@ -73,8 +74,10 @@ export default function AvisoDePrivacidad() {
             <li>Avisarte de nuevos sabores, promociones o lotes disponibles.</li>
           </ul>
           <p>
-            Si no quieres que usemos tus datos para la finalidad adicional, escríbenos por WhatsApp y dejamos de
-            enviarte avisos. Esto no afecta tus pedidos.
+            Solo te enviaremos estos avisos si marcas la casilla “Avísenme de nuevos sabores, lotes y promociones” al
+            hacer tu pedido; viene desmarcada. Guardamos la fecha en que nos diste tu permiso. Si después ya no quieres
+            recibirlos, escríbenos por WhatsApp o responde “BAJA” a cualquier mensaje y dejamos de enviarte avisos. Esto no
+            afecta tus pedidos.
           </p>
         </Seccion>
 
