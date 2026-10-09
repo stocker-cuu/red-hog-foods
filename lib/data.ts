@@ -29,8 +29,8 @@ export const PHONE = '+52 614 231 5153'; // el que aparece en la etiqueta
  * La ley pide nombre completo de quien responde por los datos y un domicilio para recibir avisos.
  */
 export const PRIVACIDAD = {
-  responsable: 'César Aguirre, quien opera la marca Red Hog Foods',
-  domicilio: 'Chihuahua, Chihuahua, México',
+  responsable: 'César Aguirre, quien opera Red Hog Foods',
+  domicilio: 'Chihuahua, Chih.',
   actualizado: '9 de octubre de 2026',
 } as const;
 
@@ -98,7 +98,7 @@ export const SALSAS: readonly Salsa[] = [
   {
     id: 'guera',
     codigo: 'WER',
-    name: 'Wera',
+    name: 'Güera',
     description: 'Cremosita con especias',
     ingredients: 'Chiles güeros, chile habanero y especias',
     heat: '2 chiles',
@@ -126,7 +126,7 @@ export const SALSAS: readonly Salsa[] = [
   {
     id: 'tomatilla',
     codigo: 'VER',
-    name: 'Tomatilla',
+    name: 'Verde',
     description: 'Tomatillo y chiles tatemados',
     ingredients: 'Tomatillo, jalapeño tatemado, serrano tatemado y cilantro',
     heat: '2 chiles',
