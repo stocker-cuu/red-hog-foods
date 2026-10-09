@@ -1,8 +1,9 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { PRESENTATIONS, SALSAS } from '@/lib/data';
 import { calculateCartTotal } from '@/lib/utils';
+import { guardarCarrito } from '@/lib/redhog';
 import type { CartItem, Cart, PresentationKey } from '@/lib/types';
 
 interface CartContextType {
@@ -28,8 +29,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const saved = localStorage.getItem('redhog-cart');
     if (saved) {
       try {
-        const parsed = JSON.parse(saved);
-        setCart(parsed);
+        const parsed = JSON.parse(saved) as Cart;
+        // Si cambió un precio desde la última visita, el carrito guardado se actualiza
+        const items = (parsed.items ?? []).map((item) => ({ ...item, price: PRESENTATIONS[item.presentation]?.price ?? item.price }));
+        setCart({ items, ...calculateCartTotal(items) });
       } catch (e) {
         console.error('Failed to load cart from storage', e);
       }
@@ -37,9 +40,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setIsHydrated(true);
   }, []);
 
+  const primeraCarga = useRef(true);
+
   useEffect(() => {
     if (isHydrated) {
       localStorage.setItem('redhog-cart', JSON.stringify(cart));
+      // Avisamos a la app solo cuando el visitante mueve el carrito (no al abrir la página)
+      if (primeraCarga.current) primeraCarga.current = false;
+      else guardarCarrito(cart);
     }
   }, [cart, isHydrated]);
 

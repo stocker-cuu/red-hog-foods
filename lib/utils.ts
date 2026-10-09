@@ -1,7 +1,7 @@
 import { DELIVERY, PRESENTATIONS, SALSAS, WHATSAPP_NUMBER } from './data';
 import type { Cart, CheckoutData, CartItem } from './types';
 
-export function generateWhatsAppMessage(cart: Cart, checkout: CheckoutData, isWholesale: boolean = false): string {
+export function generateWhatsAppMessage(cart: Cart, checkout: CheckoutData, isWholesale: boolean = false, folio?: string): string {
   if (isWholesale) {
     return generateWholesaleMessage(checkout);
   }
@@ -18,7 +18,7 @@ export function generateWhatsAppMessage(cart: Cart, checkout: CheckoutData, isWh
   const esEntrega = checkout.delivery === 'delivery';
 
   const lineas = [
-    'Hola, Red Hog. Quiero hacer este pedido:',
+    folio ? `Hola, Red Hog. Quiero hacer este pedido (folio ${folio}):` : 'Hola, Red Hog. Quiero hacer este pedido:',
     items,
     '',
     `*Total: \$${cart.total} MXN*`,

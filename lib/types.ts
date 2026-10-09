@@ -23,6 +23,8 @@ export interface Coords {
 
 export interface CheckoutData {
   name: string;
+  /** WhatsApp del cliente, 10 dígitos */
+  phone: string;
   zone: string;
   /** Calle y número. Solo se pide cuando es entrega a domicilio. */
   address: string;
@@ -36,6 +38,8 @@ export interface CheckoutData {
 
 export interface Salsa {
   id: string;
+  /** Código del producto en la app de control (el tamaño grande es el mismo código + "G") */
+  codigo?: string;
   name: string;
   description: string;
   ingredients: string;

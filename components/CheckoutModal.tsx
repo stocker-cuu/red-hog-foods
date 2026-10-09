@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { COPY, DELIVERY } from '@/lib/data';
 import { generateWhatsAppMessage, getWhatsAppLink } from '@/lib/utils';
 import { useCart } from '@/app/providers/CartProvider';
 import { registrarEvento } from './Analytics';
 import type { CheckoutData } from '@/lib/types';
+import { crearPedido, guardarCarrito, nuevoCarrito } from '@/lib/redhog';
 
 interface CheckoutModalProps {
   onClose: () => void;
@@ -16,6 +17,7 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
   const { cart, clearCart } = useCart();
   const [formData, setFormData] = useState<CheckoutData>({
     name: '',
+    phone: '',
     zone: '',
     address: '',
     coords: null,
@@ -27,6 +29,16 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
   const [ubicacion, setUbicacion] = useState<'inicial' | 'buscando' | 'lista' | 'error'>('inicial');
   const [errorUbicacion, setErrorUbicacion] = useState('');
 
+  // Avisamos a la app que este visitante llegó al formulario
+  useEffect(() => {
+    guardarCarrito(cart, 'checkout', undefined, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /** Al salir de nombre, teléfono o colonia guardamos el avance (para dar seguimiento si no termina). */
+  const guardarAvance = () => guardarCarrito(cart, 'checkout', { name: formData.name, phone: formData.phone, zone: formData.zone }, 300);
+
+  const telefono = formData.phone.replace(/\D/g, '').slice(-10);
   const esEntrega = formData.delivery === 'delivery';
   const faltanFrascos = DELIVERY.minFrascosFueraDeZona - cart.totalJars;
   // Fuera de zona solo repartimos a domicilio a partir del mínimo de frascos
@@ -81,7 +93,7 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
     setFormData((prev) => ({ ...prev, delivery: 'pickup' }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!formData.name.trim() || !formData.zone.trim()) {
@@ -89,9 +101,34 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
       return;
     }
 
+    if (telefono.length !== 10) {
+      alert('Escribe tu WhatsApp a 10 dígitos para poder confirmarte el pedido.');
+      return;
+    }
+
     if (bloqueadoPorZona) return;
 
     setIsSubmitting(true);
+
+    // La ventana se abre antes de esperar a la app: si se abre después, el celular la bloquea
+    const ventana = window.open('', '_blank');
+
+    let folio: string | undefined;
+    let total = cart.total;
+    try {
+      const r = await crearPedido(cart, formData);
+      folio = r.folio;
+      total = r.total;
+    } catch (err) {
+      const e2 = err as Error & { validacion?: boolean };
+      if (e2.validacion) {
+        ventana?.close();
+        setIsSubmitting(false);
+        alert(e2.message);
+        return;
+      }
+      // Si la app no responde, el pedido sigue normal por WhatsApp: nunca se pierde una venta
+    }
 
     registrarEvento('enviar_pedido_whatsapp', {
       value: cart.total,
@@ -101,11 +138,14 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
       compartio_ubicacion: formData.coords !== null,
     });
 
-    const message = generateWhatsAppMessage(cart, formData, false);
-    window.open(getWhatsAppLink(message), '_blank');
+    const message = generateWhatsAppMessage({ ...cart, total }, formData, false, folio);
+    const link = getWhatsAppLink(message);
+    if (ventana) ventana.location.href = link;
+    else window.location.href = link;
 
     setTimeout(() => {
       clearCart();
+      nuevoCarrito();
       onSuccess();
       setIsSubmitting(false);
       alert(COPY.checkout.successMessage);
@@ -138,8 +178,31 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
               onChange={handleChange}
               className={inputClass}
               placeholder="Tu nombre completo"
+              onBlur={guardarAvance}
               required
             />
+          </div>
+
+          <div>
+            <label htmlFor="phone" className="block text-sm font-semibold mb-2">
+              WhatsApp *
+            </label>
+            <input
+              id="phone"
+              type="tel"
+              inputMode="numeric"
+              autoComplete="tel-national"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              onBlur={guardarAvance}
+              className={inputClass}
+              placeholder="614 123 4567"
+              required
+            />
+            <p className="mt-1 text-xs text-gray-500">
+              Solo lo usamos para confirmar y dar seguimiento a tu pedido. No lo compartimos con nadie.
+            </p>
           </div>
 
           <div>
@@ -164,6 +227,7 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
               onChange={handleChange}
               className={inputClass}
               placeholder="Ej: El Reliz, Monteverde, Centro…"
+              onBlur={guardarAvance}
               required
             />
           </div>

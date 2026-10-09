@@ -7,6 +7,15 @@ export const BRAND_SHORT = 'Red Hog';
 export const LOCATION = 'Chihuahua, Chihuahua, México';
 export const SITE_URL = 'https://redhogfoods.com';
 
+/**
+ * Conexión con la app de control (app.redhogfoods.com).
+ * La llave es pública por diseño: solo permite DEJAR carritos y pedidos, nunca leer datos.
+ */
+export const REDHOG_APP = {
+  url: 'https://avcgdjyavbnyjlruxpfh.supabase.co',
+  key: 'sb_publishable_SOuL38ZD85V_QVUzFFjelQ_RKpA7m-k',
+} as const;
+
 // Reglas de entrega — edita aquí si cambian tus zonas, el mínimo o el punto de recolección
 export const DELIVERY = {
   zonaNombre: 'Zona El Reliz y alrededores',
@@ -47,8 +56,8 @@ export const PRESENTATIONS = {
     price: 75,
   },
   large: {
-    volume: '350 ml',
-    price: 125,
+    volume: '300 ml',
+    price: 100,
   },
 } as const;
 
@@ -64,6 +73,7 @@ export const CONSERVACION_DEFAULT =
 export const SALSAS: readonly Salsa[] = [
   {
     id: 'fresca',
+    codigo: 'FRE',
     name: 'Fresca',
     description: 'Rojiza y jugosa, con ingredientes crudos',
     ingredients: 'Tomate, jalapeño, serrano en crudo',
@@ -77,6 +87,7 @@ export const SALSAS: readonly Salsa[] = [
   },
   {
     id: 'guera',
+    codigo: 'WER',
     name: 'Güera',
     description: 'Cremosita con especias',
     ingredients: 'Chiles güeros, chile habanero y especias',
@@ -90,6 +101,7 @@ export const SALSAS: readonly Salsa[] = [
   },
   {
     id: 'roja',
+    codigo: 'ROJ',
     name: 'Roja',
     description: 'La clásica de árbol pero con un toque más cremosito',
     ingredients: 'Tomate, chile de árbol tatemado y chiltepin',
@@ -103,6 +115,7 @@ export const SALSAS: readonly Salsa[] = [
   },
   {
     id: 'tomatilla',
+    codigo: 'VER',
     name: 'Tomatilla',
     description: 'Tomatillo y chiles tatemados',
     ingredients: 'Tomatillo, jalapeño tatemado, serrano tatemado y cilantro',
@@ -116,6 +129,7 @@ export const SALSAS: readonly Salsa[] = [
   },
   {
     id: 'negra',
+    codigo: 'NEG',
     name: 'Negra',
     description: 'Chiles tatemados, salsas negras',
     ingredients: 'Habaneros tatemados, salsas negras y especias',
