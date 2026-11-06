@@ -85,13 +85,14 @@ export function guardarCarrito(
 export async function crearPedido(cart: Cart, form: CheckoutData): Promise<{ folio: string; total: number }> {
   clearTimeout(pendiente);
   const esEntrega = form.delivery === 'delivery';
+  const esNacional = form.delivery === 'national';
   const data = await rpc('crear_pedido', {
     p: {
       nombre: form.name,
       telefono: form.phone,
       zona: form.zone,
-      direccion: esEntrega ? form.address : '',
-      entrega: esEntrega ? 'entrega' : 'recoger',
+      direccion: esNacional ? `${form.address.trim()} · CP ${form.postalCode ?? ''}` : esEntrega ? form.address : '',
+      entrega: esNacional ? 'nacional' : esEntrega ? 'entrega' : 'recoger',
       en_zona: esEntrega ? form.inZone : null,
       ubicacion: esEntrega ? getMapsLink(form) : null,
       comentarios: form.comments,

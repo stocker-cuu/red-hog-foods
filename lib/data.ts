@@ -22,6 +22,12 @@ export const DELIVERY = {
   minFrascosFueraDeZona: 3,
   puntoRecoleccion: 'Alsuper Reliz',
 } as const;
+
+// Envío nacional: va refrigerado (hielera + gel) y express para que llegue en buen estado
+export const ENVIO_NACIONAL = {
+  minFrascos: 3,
+  dias: 'lunes a miércoles',
+} as const;
 export const PHONE = '+52 614 231 5153'; // el que aparece en la etiqueta
 
 /**
@@ -246,7 +252,7 @@ export const COPY = {
     items: [
       {
         question: '¿Dónde entregan?',
-        answer: 'Realizamos entregas dentro de Zona El Reliz y alrededores o punto a convenir dentro de esta zona. Si es fuera de Reliz, de 3 envases en adelante llevamos a domicilio o punto a convenir establecido por ambas partes.',
+        answer: 'Realizamos entregas dentro de Zona El Reliz y alrededores o punto a convenir dentro de esta zona. Si es fuera de Reliz, de 3 envases en adelante llevamos a domicilio o punto a convenir establecido por ambas partes. ¿Estás en otra ciudad? Enviamos a todo México desde 3 frascos, en hielera con gel refrigerante y por paquetería express para que llegue fresca; te cotizamos el envío por WhatsApp antes de pagar.',
       },
       {
         question: '¿Cómo puedo pagar?',
@@ -287,6 +293,7 @@ export const COPY = {
     comments: 'Comentarios (opcional)',
     deliveryOption1: 'Entrega a domicilio',
     deliveryOption2: 'Recolección en sucursal',
+    deliveryOption3: 'Envío nacional (refrigerado)',
     disclaimer:
       '✓ Tu pedido queda sujeto a confirmación de disponibilidad\n✓ El costo de entrega se confirma por WhatsApp\n✓ El envío no equivale a pago confirmado',
     successMessage: 'Tu pedido fue enviado a WhatsApp. Espera confirmación de disponibilidad, costo y forma de pago.',

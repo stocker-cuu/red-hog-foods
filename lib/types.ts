@@ -34,7 +34,9 @@ export interface CheckoutData {
   address: string;
   /** Ubicación compartida por el cliente desde su celular (opcional) */
   coords: Coords | null;
-  delivery: 'delivery' | 'pickup';
+  delivery: 'delivery' | 'pickup' | 'national';
+  /** Código postal, solo para envío nacional */
+  postalCode?: string;
   /** Si el domicilio cae dentro de la zona regular de reparto */
   inZone: boolean;
   comments: string;

@@ -1,4 +1,4 @@
-import { DELIVERY, PRESENTATIONS, SALSAS, WHATSAPP_NUMBER } from './data';
+import { DELIVERY, ENVIO_NACIONAL, PRESENTATIONS, SALSAS, WHATSAPP_NUMBER } from './data';
 import type { Cart, CheckoutData, CartItem } from './types';
 
 export function generateWhatsAppMessage(cart: Cart, checkout: CheckoutData, isWholesale: boolean = false, folio?: string): string {
@@ -16,6 +16,24 @@ export function generateWhatsAppMessage(cart: Cart, checkout: CheckoutData, isWh
     .join('\n');
 
   const esEntrega = checkout.delivery === 'delivery';
+
+  if (checkout.delivery === 'national') {
+    const l = [
+      folio ? `Hola, Red Hog. Quiero hacer este pedido con envío nacional (folio ${folio}):` : 'Hola, Red Hog. Quiero hacer este pedido con envío nacional:',
+      items,
+      '',
+      `*Salsas: \$${cart.total} MXN* (más envío)`,
+      '',
+      '*Datos de envío:*',
+      `Nombre: ${checkout.name}`,
+      `Ciudad y estado: ${checkout.zone}`,
+      `Dirección: ${checkout.address.trim()}`,
+      `CP: ${checkout.postalCode ?? ''}`,
+    ];
+    if (checkout.comments.trim()) l.push(`Comentarios: ${checkout.comments.trim()}`);
+    l.push('', `Quedo pendiente de la cotización del envío refrigerado (salen de ${ENVIO_NACIONAL.dias}) y la forma de pago.`);
+    return encodeURIComponent(l.join('\n'));
+  }
 
   const lineas = [
     folio ? `Hola, Red Hog. Quiero hacer este pedido (folio ${folio}):` : 'Hola, Red Hog. Quiero hacer este pedido:',

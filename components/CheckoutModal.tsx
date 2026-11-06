@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { COPY, DELIVERY } from '@/lib/data';
+import { COPY, DELIVERY, ENVIO_NACIONAL } from '@/lib/data';
 import { generateWhatsAppMessage, getWhatsAppLink } from '@/lib/utils';
 import { useCart } from '@/app/providers/CartProvider';
 import { registrarEvento } from './Analytics';
@@ -40,6 +40,10 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
 
   const telefono = formData.phone.replace(/\D/g, '').slice(-10);
   const esEntrega = formData.delivery === 'delivery';
+  const esNacional = formData.delivery === 'national';
+  const faltanNacional = ENVIO_NACIONAL.minFrascos - cart.totalJars;
+  const bloqueadoNacional = esNacional && faltanNacional > 0;
+  const cp = (formData.postalCode ?? '').replace(/\D/g, '').slice(0, 5);
   const faltanFrascos = DELIVERY.minFrascosFueraDeZona - cart.totalJars;
   // Fuera de zona solo repartimos a domicilio a partir del mínimo de frascos
   const bloqueadoPorZona = esEntrega && !formData.inZone && faltanFrascos > 0;
@@ -97,7 +101,7 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
     e.preventDefault();
 
     if (!formData.name.trim() || !formData.zone.trim()) {
-      alert('Por favor completa tu nombre y tu colonia o zona.');
+      alert(esNacional ? 'Por favor completa tu nombre y tu ciudad.' : 'Por favor completa tu nombre y tu colonia o zona.');
       return;
     }
 
@@ -106,7 +110,12 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
       return;
     }
 
-    if (bloqueadoPorZona) return;
+    if (bloqueadoPorZona || bloqueadoNacional) return;
+
+    if (esNacional && (cp.length !== 5 || formData.address.trim().length < 5)) {
+      alert('Para envío nacional escribe tu dirección completa y tu código postal de 5 dígitos.');
+      return;
+    }
 
     setIsSubmitting(true);
 
@@ -215,12 +224,13 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
             <select id="delivery" name="delivery" value={formData.delivery} onChange={handleChange} className={inputClass}>
               <option value="delivery">{COPY.checkout.deliveryOption1}</option>
               <option value="pickup">{COPY.checkout.deliveryOption2}</option>
+              <option value="national">{COPY.checkout.deliveryOption3}</option>
             </select>
           </div>
 
           <div>
             <label htmlFor="zone" className="block text-sm font-semibold mb-2">
-              {COPY.checkout.zone} *
+              {esNacional ? 'Ciudad y estado' : COPY.checkout.zone} *
             </label>
             <input
               id="zone"
@@ -229,7 +239,7 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
               value={formData.zone}
               onChange={handleChange}
               className={inputClass}
-              placeholder="Ej: El Reliz, Monteverde, Centro…"
+              placeholder={esNacional ? 'Ej: Guadalajara, Jalisco' : 'Ej: El Reliz, Monteverde, Centro…'}
               onBlur={guardarAvance}
               required
             />
@@ -301,6 +311,69 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
             </>
           )}
 
+          {esNacional && (
+            <>
+              <div>
+                <label htmlFor="address" className="block text-sm font-semibold mb-2">
+                  Dirección completa *
+                </label>
+                <input
+                  id="address"
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className={inputClass}
+                  placeholder="Calle, número, colonia"
+                  autoComplete="street-address"
+                />
+              </div>
+              <div>
+                <label htmlFor="postalCode" className="block text-sm font-semibold mb-2">
+                  Código postal *
+                </label>
+                <input
+                  id="postalCode"
+                  type="text"
+                  inputMode="numeric"
+                  autoComplete="postal-code"
+                  name="postalCode"
+                  value={cp}
+                  onChange={handleChange}
+                  className={inputClass}
+                  placeholder="44100"
+                />
+              </div>
+              {bloqueadoNacional ? (
+                <div className="bg-amber-50 border border-amber-300 rounded-lg p-4 space-y-3">
+                  <p className="text-sm text-amber-900">
+                    El envío nacional es a partir de <strong>{ENVIO_NACIONAL.minFrascos} frascos</strong> (así el envío te sale mejor por frasco). Llevas {cart.totalJars}, te{' '}
+                    {faltanNacional === 1 ? 'falta 1' : `faltan ${faltanNacional}`}.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onClose();
+                      document.getElementById('sabores')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="w-full btn btn-small bg-redhog-red text-white hover:bg-red-700"
+                  >
+                    Agregar más salsas
+                  </button>
+                </div>
+              ) : (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 space-y-1">
+                  <p className="text-xs text-blue-900">
+                    📦 Va <strong>refrigerada</strong> en hielera con gel, por paquetería <strong>express</strong> para que llegue fresca.
+                  </p>
+                  <p className="text-xs text-blue-900">
+                    Te mandamos por WhatsApp el costo del envío (empaque incluido) antes de que pagues. Enviamos de {ENVIO_NACIONAL.dias}.
+                  </p>
+                </div>
+              )}
+            </>
+          )}
+
           {/* Regla de mínimo fuera de zona */}
           {bloqueadoPorZona && (
             <div className="bg-amber-50 border border-amber-300 rounded-lg p-4 space-y-3">
@@ -327,7 +400,7 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
             </div>
           )}
 
-          {!esEntrega && (
+          {formData.delivery === 'pickup' && (
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
               <p className="text-xs text-blue-900">
                 Punto de recolección: <strong>{DELIVERY.puntoRecoleccion}</strong>. Acordamos día y hora por WhatsApp.
@@ -393,7 +466,7 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
             </button>
             <button
               type="submit"
-              disabled={isSubmitting || bloqueadoPorZona}
+              disabled={isSubmitting || bloqueadoPorZona || bloqueadoNacional}
               className="flex-1 btn btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? 'Enviando…' : 'Enviar por WhatsApp'}
