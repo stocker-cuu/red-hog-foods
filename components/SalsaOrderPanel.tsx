@@ -5,6 +5,8 @@ import { PRESENTATIONS } from '@/lib/data';
 import { formatPrice } from '@/lib/utils';
 import { useCart } from '@/app/providers/CartProvider';
 import { registrarEvento } from './Analytics';
+import { useAgotado } from '@/app/providers/StockProvider';
+import { AgotadoBox } from './Agotado';
 import type { PresentationKey, Salsa } from '@/lib/types';
 
 export default function SalsaOrderPanel({ salsa }: { salsa: Salsa }) {
@@ -13,6 +15,8 @@ export default function SalsaOrderPanel({ salsa }: { salsa: Salsa }) {
   const [justAdded, setJustAdded] = useState(false);
 
   const { addToCart } = useCart();
+  const agotado = useAgotado();
+  const sinStock = agotado(salsa, presentation);
   const price = PRESENTATIONS[presentation].price;
 
   const handleAddToCart = () => {
@@ -43,12 +47,16 @@ export default function SalsaOrderPanel({ salsa }: { salsa: Salsa }) {
               }`}
             >
               <span className="block">{PRESENTATIONS[key].volume}</span>
-              <span className="block text-xs opacity-80">{formatPrice(PRESENTATIONS[key].price)}</span>
+              <span className="block text-xs opacity-80">{agotado(salsa, key) ? 'Agotada' : formatPrice(PRESENTATIONS[key].price)}</span>
             </button>
           ))}
         </div>
       </div>
 
+      {sinStock ? (
+        <AgotadoBox salsa={salsa} presentation={presentation} grande />
+      ) : (
+      <>
       <div className="flex items-center justify-between">
         <span className="text-sm font-semibold">Cantidad</span>
         <div className="flex items-center border border-gray-300 rounded-lg">
@@ -83,6 +91,8 @@ export default function SalsaOrderPanel({ salsa }: { salsa: Salsa }) {
       >
         {justAdded ? '✓ Agregado a tu pedido' : 'Agregar al pedido'}
       </button>
+      </>
+      )}
     </div>
   );
 }

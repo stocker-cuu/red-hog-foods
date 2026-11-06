@@ -7,6 +7,8 @@ import { PRESENTATIONS } from '@/lib/data';
 import { formatPrice } from '@/lib/utils';
 import { useCart } from '@/app/providers/CartProvider';
 import { registrarEvento } from './Analytics';
+import { useAgotado } from '@/app/providers/StockProvider';
+import { AgotadoBox } from './Agotado';
 import type { PresentationKey, Salsa } from '@/lib/types';
 
 interface SalsaCardProps {
@@ -19,6 +21,9 @@ export default function SalsaCard({ salsa }: SalsaCardProps) {
   const [justAdded, setJustAdded] = useState(false);
 
   const { addToCart } = useCart();
+  const agotado = useAgotado();
+  const sinStock = agotado(salsa, presentation);
+  const todoAgotado = agotado(salsa, 'small') && agotado(salsa, 'large');
   const price = PRESENTATIONS[presentation].price;
 
   // Las salsas en desarrollo todavía no se pueden pedir
@@ -60,6 +65,11 @@ export default function SalsaCard({ salsa }: SalsaCardProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
+        {todoAgotado && (
+          <div className="absolute top-3 left-3 bg-redhog-red text-white rounded-full px-3 py-1 text-xs font-bold shadow-md">
+            Agotada · 🧑‍🍳 en producción
+          </div>
+        )}
         <div className="absolute top-3 right-3 bg-white/95 rounded-full px-3 py-1 text-xs font-bold shadow-md">
           <span aria-label={`Nivel de picor: ${salsa.heatLevel} de 4`}>
             {Array(salsa.heatLevel).fill('🌶️').join('')}
@@ -105,11 +115,16 @@ export default function SalsaCard({ salsa }: SalsaCardProps) {
                   }`}
                 >
                   {PRESENTATIONS[key].volume}
+                  {agotado(salsa, key) && <span className="block text-[10px] font-normal opacity-80">agotada</span>}
                 </button>
               ))}
             </div>
           </div>
 
+          {sinStock ? (
+            <AgotadoBox salsa={salsa} presentation={presentation} />
+          ) : (
+          <>
           <div className="flex items-center justify-between">
             <label className="text-xs font-semibold">Cantidad:</label>
             <div className="flex items-center border border-gray-300 rounded">
@@ -145,6 +160,8 @@ export default function SalsaCard({ salsa }: SalsaCardProps) {
               {justAdded ? '✓ Agregado' : 'Agregar al pedido'}
             </button>
           </div>
+          </>
+          )}
         </div>
       </div>
     </div>

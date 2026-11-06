@@ -104,3 +104,14 @@ export async function crearPedido(cart: Cart, form: CheckoutData): Promise<{ fol
   const fila = Array.isArray(data) ? data[0] : data;
   return { folio: fila.folio, total: Number(fila.total) };
 }
+
+/** Qué salsas hay (true) o están agotadas (false), por código de la app. Si falla, se asume que hay. */
+export async function obtenerDisponibilidad(): Promise<Record<string, boolean>> {
+  const filas = (await rpc('disponibilidad', {})) as { codigo: string; disponible: boolean }[];
+  return Object.fromEntries((filas ?? []).map((f) => [f.codigo.toUpperCase(), f.disponible]));
+}
+
+/** Deja nombre y WhatsApp para que le avisemos cuando vuelva una salsa agotada. */
+export async function pedirAviso(codigo: string, nombre: string, telefono: string, aceptaPromos: boolean) {
+  await rpc('pedir_aviso', { p_codigo: codigo, p_nombre: nombre, p_telefono: telefono, p_acepta_promos: aceptaPromos });
+}
