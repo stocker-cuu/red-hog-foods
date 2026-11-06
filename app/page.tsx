@@ -9,6 +9,7 @@ import FAQ from '@/components/FAQ';
 import Wholesale from '@/components/Wholesale';
 import Footer from '@/components/Footer';
 import FloatingCartBar from '@/components/FloatingCartBar';
+import IrAlHash from '@/components/IrAlHash';
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <Wholesale />
       <Footer />
       <FloatingCartBar />
+      <IrAlHash />
     </main>
   );
 }

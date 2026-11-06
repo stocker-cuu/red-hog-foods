@@ -5,7 +5,7 @@ import { COPY } from '@/lib/data';
 
 export default function About() {
   return (
-    <section id="quienes-somos" className="py-16 md:py-24 bg-white">
+    <section id="quienes-somos" className="scroll-mt-24 py-16 md:py-24 bg-white">
       <div className="container-max">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
           {/* Foto */}

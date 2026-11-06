@@ -5,7 +5,7 @@ import SalsaCard from './SalsaCard';
 
 export default function Flavors() {
   return (
-    <section id="sabores" className="py-16 md:py-24 bg-white">
+    <section id="sabores" className="scroll-mt-24 py-16 md:py-24 bg-white">
       <div className="container-max">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="headline mb-3">{COPY.flavors.title}</h2>

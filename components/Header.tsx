@@ -4,17 +4,15 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '@/app/providers/CartProvider';
+import { irA } from '@/lib/irA';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { cart } = useCart();
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setMobileMenuOpen(false);
-    }
+    setMobileMenuOpen(false);
+    irA(id);
   };
 
   return (
@@ -23,7 +21,7 @@ export default function Header() {
         <div className="flex justify-between items-center py-3 md:py-4">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="#" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
               <Image
                 src="/logo.jpg"
                 alt="Red Hog Salsa — Chihuahua, México"

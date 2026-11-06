@@ -4,7 +4,7 @@ import { COPY } from '@/lib/data';
 
 export default function HowToBuy() {
   return (
-    <section id="como-comprar" className="py-16 md:py-24 bg-redhog-cream">
+    <section id="como-comprar" className="scroll-mt-24 py-16 md:py-24 bg-redhog-cream">
       <div className="container-max">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="headline mb-3">{COPY.howToBuy.title}</h2>

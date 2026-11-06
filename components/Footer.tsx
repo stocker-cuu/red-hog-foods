@@ -2,6 +2,7 @@
 
 import { BRAND_NAME, LOCATION, WHATSAPP_NUMBER, COPY, SOCIAL } from '@/lib/data';
 import { BrandIcon, WhatsAppIcon } from './BrandIcons';
+import { irA } from '@/lib/irA';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -21,19 +22,19 @@ export default function Footer() {
             <h4 className="font-semibold">Enlaces</h4>
             <nav className="space-y-2 text-sm">
               <button
-                onClick={() => document.getElementById('sabores')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => irA('sabores')}
                 className="block text-gray-300 hover:text-white transition-colors"
               >
                 Nuestros sabores
               </button>
               <button
-                onClick={() => document.getElementById('como-comprar')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => irA('como-comprar')}
                 className="block text-gray-300 hover:text-white transition-colors"
               >
                 Cómo comprar
               </button>
               <button
-                onClick={() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => irA('faq')}
                 className="block text-gray-300 hover:text-white transition-colors"
               >
                 Preguntas frecuentes
