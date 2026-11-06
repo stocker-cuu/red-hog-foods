@@ -1,6 +1,6 @@
 'use client';
 
-import { COPY } from '@/lib/data';
+import { COPY, ENVIO_NACIONAL } from '@/lib/data';
 
 export default function HowToBuy() {
   return (
@@ -23,6 +23,21 @@ export default function HowToBuy() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-12 rounded-2xl border-2 border-dashed border-redhog-red/40 bg-white p-6 text-center max-w-2xl mx-auto">
+          <p className="text-lg font-bold">📦 ¿Estás fuera de Chihuahua? Enviamos a todo México</p>
+          <p className="text-gray-700 mt-1">
+            Refrigerada en hielera con gel y por paquetería express para que llegue fresca. Desde {ENVIO_NACIONAL.minFrascos} frascos.
+          </p>
+          {ENVIO_NACIONAL.promo.activa && (
+            <>
+              <p className="mt-3 inline-block rounded-full bg-redhog-red px-4 py-1 text-sm font-bold text-white">
+                🎉 {ENVIO_NACIONAL.promo.texto}**
+              </p>
+              <p className="mt-2 text-xs text-gray-500">**{ENVIO_NACIONAL.promo.letraChica}</p>
+            </>
+          )}
         </div>
       </div>
     </section>

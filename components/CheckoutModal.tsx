@@ -369,6 +369,12 @@ export default function CheckoutModal({ onClose, onSuccess }: CheckoutModalProps
                   <p className="text-xs text-blue-900">
                     Te mandamos por WhatsApp el costo del envío (empaque incluido) antes de que pagues. Enviamos de {ENVIO_NACIONAL.dias}.
                   </p>
+                  {ENVIO_NACIONAL.promo.activa && (
+                    <p className="text-xs font-semibold text-redhog-red">
+                      🎉 {ENVIO_NACIONAL.promo.texto}**
+                      <span className="block font-normal text-gray-500">**{ENVIO_NACIONAL.promo.letraChica}</span>
+                    </p>
+                  )}
                 </div>
               )}
             </>
