@@ -171,7 +171,9 @@ export const SALSAS: readonly Salsa[] = [
     ingredients: 'Serranos tatemados, salsas negras y especias',
     heat: '3 chiles',
     heatLevel: 3,
-    pairings: ['Tostada de ceviche', 'aguachile', 'arroz rojo', 'frijoles charros'],
+    pairings: ['Tacos', 'carnitas', 'frijoles puercos', 'tostadas', 'caldos'],
+    pairingNote:
+      'Va con tacos de todo tipo, carnitas, frijoles puercos, tostadas y en cualquier caldito.',
     image: '/images/salsa-negra.jpg', // misma foto que la Negra
     color: '#3B3A2F',
   },
