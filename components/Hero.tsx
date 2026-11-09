@@ -43,10 +43,10 @@ export default function Hero() {
           </div>
 
           <div className="order-1 md:order-2 flex items-center justify-center">
-            <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-gray-100 shadow-lg">
+            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 shadow-lg">
               <Image
-                src="/hero-image.jpg"
-                alt="Frascos de salsa Red Hog sobre tabla de madera"
+                src="/seis-salsas.jpg"
+                alt="Los seis sabores de Red Hog Salsa en el bosque de Chihuahua"
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 50vw"
