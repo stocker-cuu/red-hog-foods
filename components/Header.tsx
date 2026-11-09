@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '@/app/providers/CartProvider';
 import { irA } from '@/lib/irA';
+import CarritoBoton from './CarritoBoton';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -60,16 +61,12 @@ export default function Header() {
             <button onClick={() => scrollToSection('pedido')} className="btn btn-primary">
               Pedir
             </button>
-            {cart.totalJars > 0 && (
-              <div className="text-sm font-semibold text-redhog-red">{cart.totalJars} en pedido</div>
-            )}
+            <CarritoBoton frascos={cart.totalJars} />
           </div>
 
           {/* Mobile Menu Toggle */}
           <div className="md:hidden flex items-center gap-3">
-            {cart.totalJars > 0 && (
-              <div className="text-sm font-semibold text-redhog-red">{cart.totalJars}</div>
-            )}
+            <CarritoBoton frascos={cart.totalJars} chico />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-lg hover:bg-gray-100"
