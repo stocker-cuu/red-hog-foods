@@ -7,7 +7,7 @@ import './globals.css';
 
 const TITLE = 'Red Hog Salsa | Salsas Artesanales de Chihuahua';
 const DESCRIPTION =
-  'Salsas artesanales hechas en Chihuahua. Cinco sabores para tacos, carne asada, botanas y todo lo que necesite más carácter. Pide por WhatsApp.';
+  'Salsas artesanales hechas en Chihuahua. Seis sabores para tacos, carne asada, botanas y todo lo que necesite más carácter. Pide por WhatsApp.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

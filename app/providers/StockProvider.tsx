@@ -26,6 +26,9 @@ export function useAgotado() {
   const stock = useContext(StockContext);
   return (salsa: Salsa, presentation: PresentationKey) => {
     const c = codigoDe(salsa, presentation);
-    return !!c && stock[c] === false;
+    if (!c) return false;
+    // Si la app ya respondió y esa presentación no existe allá, no se puede pedir (se perdería del pedido)
+    if (Object.keys(stock).length && !(c in stock)) return true;
+    return stock[c] === false;
   };
 }

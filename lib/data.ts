@@ -164,15 +164,16 @@ export const SALSAS: readonly Salsa[] = [
     color: '#4A4A4A',
   },
   {
-    id: 'coming-soon-1',
-    name: 'Próximamente',
-    description: 'Estamos trabajando en más sabores',
-    ingredients: '...',
-    heat: '?',
-    heatLevel: 0,
-    pairings: [],
-    image: '/images/coming-soon.jpg',
-    color: '#CCCCCC',
+    id: 'negra-serrana',
+    codigo: 'NSR',
+    name: 'Negra Serrana',
+    description: 'Nuestra Negra, pero de chile serrano: tatemada, ahumada y con un picor más amable',
+    ingredients: 'Serranos tatemados, salsas negras y especias',
+    heat: '3 chiles',
+    heatLevel: 3,
+    pairings: ['Tostada de ceviche', 'aguachile', 'arroz rojo', 'frijoles charros'],
+    image: '/images/salsa-negra.jpg', // misma foto que la Negra
+    color: '#3B3A2F',
   },
   {
     id: 'coming-soon-2',
@@ -202,7 +203,7 @@ export const SALSAS: readonly Salsa[] = [
 export const COPY = {
   hero: {
     headline: 'Salsas artesanales hechas en Chihuahua',
-    subheadline: 'Cinco sabores para tacos, carne asada, botanas y todo lo que necesite más carácter',
+    subheadline: 'Seis sabores para tacos, carne asada, botanas y todo lo que necesite más carácter',
     badge: 'Hechas en Chihuahua',
     ctaPrimary: 'Arma tu pedido',
     ctaSecondary: 'Conoce los sabores',
